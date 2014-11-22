@@ -1,0 +1,191 @@
+program Practico2;
+
+{$mode objfpc}{$H+}
+
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Classes, unit2
+  { you can add units after this };
+var
+  v:TVector;
+  a,k,p,j,i,x,d,l,c,e,r,t,i1,i2:integer;
+  s:string;
+  yu:array[1..100]of integer;
+  ye:array[1..100]of integer;
+
+begin
+
+  writeln('Bienvenido a la resolucion del practico 2 de Programacion I.-');
+  writeln('Para seleccionar la pregunta escriba el numero de la misma');
+  writeln('Opciones :');
+  readln(a);
+
+
+   if a = 1 then
+   begin
+      v:=tvector.crear();
+   readln(d);
+   v.setDim(d);
+   for i:=1 to d do begin
+         readln(x);
+         v.setelem(i,x);
+         end;
+   v.pregunta1(v);
+   end;
+
+   if a = 2 then
+   begin
+        v:=tvector.crear();
+        readln(d);
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        v.pregunta2(v);
+
+   end;
+
+   if a = 3 then
+   begin
+        v:=tvector.crear();
+        readln(d);
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        writeln(v.pregunta3(v));
+
+   end;
+
+
+   if a = 4 then
+   begin
+        v:=tvector.crear();
+        readln(d);
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        v.pregunta4(v);
+
+   end;
+
+    if a = 5 then
+   begin
+     readln(d);
+     p:=d;
+     for i:=1 to p do begin
+           readln(x);
+           yu[i]:=x;
+     end;
+     readln(d);
+     l:=d;
+     for j:=1 to l do begin
+           readln(x);
+           ye[j]:=x;
+     end;
+      c:=p+l;
+     v:=tvector.crear();
+
+     v.setdim(c);
+     i1:=1;
+     i2:=1;
+     k:=1;
+     while (i1<=p) and (i2<=l) do begin
+             if yu[i1]<=ye[i2] then
+             begin
+                  v.setelem(k,yu[i1]);
+                  i1:=i1+1;
+             end
+             else
+             begin
+                     v.setelem(k,ye[i2]);
+                     i2:=i2+1;
+             end;
+             k:=k+1;
+           end;
+     if i1 = p then
+     begin
+         for j:=i2 to l do begin
+            v.setelem(k,ye[j]);
+            k:=k+1;
+         end;
+
+     end
+     else
+     begin
+         for j:=i1 to p do begin
+            v.setelem(k,yu[j]);
+            k:=k+1;
+         end;
+     end;
+
+          v.pregunta5();
+     end;
+
+
+
+
+
+    if a=6 then
+    begin
+       v:=tvector.crear();
+        readln(d);
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        v.pregunta6();
+
+
+    end;
+
+    if a=9 then
+    begin
+        v:=tvector.crear();
+        readln(d);
+        k:=d div 3;
+        e:=k;
+        r:=k;
+        t:=k;
+        while (e+r+t)<>d do begin
+               t:=t+1;
+        end;
+        writeln(e,r,t);
+
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        v.pregunta9(e,r,t);
+    end;
+
+    if a=10 then
+    begin
+      v:=tvector.crear();
+        readln(d);
+        k:=d div 2;
+        e:=k;
+        r:=k;
+        while (e+r)<>d do begin
+               r:=r+1;
+        end;
+        writeln(e,r);
+
+        v.setdim(d);
+        for i:= 1 to d do begin
+              readln(x);
+              v.setelem(i,x);
+        end;
+        v.pregunta10(e,r);
+    end;
+
+  readln();
+end.                         
