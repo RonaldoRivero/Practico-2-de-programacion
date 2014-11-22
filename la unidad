@@ -1,0 +1,390 @@
+unit unit2;
+{$mode objfpc}{$H+}
+interface
+uses
+Classes, SysUtils;
+Const
+  MAX_E=100;
+
+Type
+
+     { TVector }
+
+     TVector=Class
+       private
+         elem:array[1..MAX_E]of integer;
+         elem2:array[1..MAX_E]of integer;
+         elem3:array[1..MAX_E]of integer;
+         elem4:array[1..MAX_E]of integer;
+         dim:integer;
+         dim2:integer;
+         dim3:integer;
+         dim4:integer;
+       public
+         Constructor Crear();
+         procedure setDim(n:integer);
+         function  getDim():integer;
+         procedure setElem(pos:integer; ele:integer);
+         function  getEle(pos:integer):integer;
+         procedure eliminar(var len:integer;var pos:integer);
+         procedure pregunta1(v:tvector);
+         procedure pregunta2(v:tvector);
+         function pregunta3(v:tvector):integer;
+         procedure pregunta4(v:tvector);
+         procedure pregunta5();
+         procedure pregunta6();
+         procedure pregunta9(e:integer;r:integer;t:integer);//e:integer;r:integer;t:integer
+         procedure pregunta10(e:integer;r:integer);
+
+
+     end;
+
+
+implementation
+constructor TVector.Crear;
+var
+  d:integer;
+begin
+  dim:=0;
+  for d:=1 to dim do
+     elem[d]:=0;
+end;
+
+
+
+procedure TVector.setDim(n:integer);
+begin
+  if(n<MAX_E)then
+          begin
+            dim:=n ;
+           end
+  else
+        Writeln('Fuera de Rangot...!!!');
+end;
+
+
+function  TVector.getDim():integer;
+begin
+  result:=dim;
+end;
+procedure TVector.setElem(pos:integer; ele:integer);
+begin
+  if(pos>0)AND(pos<=dim)then
+          begin
+        elem[pos]:=ele;
+
+          end
+  else
+  begin
+
+        Writeln('Posicion Fuera de Rangoy...!!!');
+  end;
+end;
+
+
+function  TVector.getEle(pos:integer):integer;
+begin
+
+  if(pos>0)AND(pos<=dim)then
+          result:=elem[pos]
+    else
+          Writeln('Posicion Fuera de Rangos...!!!');
+end;
+
+procedure TVector.eliminar(var len: integer; var pos: integer);
+var y:integer;
+begin
+  if dim > 0 then begin
+       for y:=pos to len do begin
+          elem[y]:=elem[y+1];
+    end;
+
+
+  end;
+  len:=len-1;
+  dim:=dim-1;
+
+
+end;
+    {elimina primos}
+procedure TVector.pregunta1(v: tvector);
+var k,c,i,y,x,l:integer;
+begin
+   k:=1;
+   while k<=dim do begin
+         l:=k;
+     x:=elem[k];
+     c:=0;
+     for i:=1 to x do begin
+         if x mod i = 0 then
+         c:=c+1;
+         end;
+     if c = 2 then begin
+        writeln('Es primo...');
+        if dim > 0 then begin
+       for y:=k to dim do begin
+          elem[y]:=elem[y+1];
+    end;
+  end;
+
+  dim:=dim-1;
+         k:=k-1;
+
+
+        end
+   else begin
+      writeln('No es primo...');
+       end;
+
+                k:=k+1;
+                  end;
+   for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+   end;
+
+{purga}
+procedure TVector.pregunta2(v: tvector);
+var i,k,j,o,l,y,c:integer;
+begin
+
+  for i:=1 to dim do begin
+   c:=0;
+    for j:=dim downto i+1 do begin
+      if (elem[j]= elem[i] )and (elem[j]<> -1) then
+      begin
+         elem[j]:=-1;
+         c:=1;
+
+      end;
+    end;
+    if c=1 then
+    begin
+       elem[i]:=-1;
+    end;
+  end;
+  i:=1;
+  while i<=dim do begin
+    if elem[i]=-1 then
+    begin
+       if dim > 0 then begin
+       for y:=i to dim do begin
+          elem[y]:=elem[y+1];
+    end;
+
+      dim:=dim-1;
+  i:=i-1;
+  end;
+
+    end;
+    i:=i+1;
+  end;
+  for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+
+end;
+
+procedure TVector.pregunta4(v: tvector);
+var i,k,j,o,l,y,c:integer;
+begin
+  for i:=1 to dim do begin
+    for j:=i+1 to dim do begin
+      if (elem[j]= elem[i] )and (elem[j]<> -1) then
+      begin
+         elem[j]:=-1;
+
+      end;
+    end;
+
+  end;
+  i:=1;
+  while i<=dim do begin
+    if elem[i]=-1 then
+    begin
+       if dim > 0 then begin
+       for y:=i to dim do begin
+          elem[y]:=elem[y+1];
+    end;
+
+      dim:=dim-1;
+  i:=i-1;
+  end;
+
+    end;
+    i:=i+1;
+  end;
+  for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+end;
+
+function TVector.pregunta3(v: tvector): integer;
+var i,c,cm,num,numm,j:integer;
+begin
+  i:=1;
+  cm:=0;
+
+  while i<=dim do begin
+
+    c:=0;
+    num:=elem[i];j:=1;
+    while j<=dim do begin
+
+       if num= elem[j] then
+       begin
+            c:=c+1;
+
+       end;
+       j:=j+1;
+    end;
+    if c>cm then
+    begin
+         cm:=c;
+         numm:=num;
+    end;
+    i:=i+1;
+  end;
+  result:=numm;
+
+end;
+
+procedure TVector.pregunta5();
+var l,i:integer;
+begin
+    for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+
+end;
+
+procedure TVector.pregunta6;
+
+var i,k,j,o,l,y,c:integer;
+begin
+
+  for i:=1 to dim do begin
+   c:=0;
+    for j:=dim downto i+1 do begin
+      if (elem[j]= elem[i] )and (elem[j]<> -1) then
+      begin
+
+         c:=1;
+
+      end;
+    end;
+    if c=0 then
+    begin
+       elem[i]:=-1;
+    end;
+  end;
+  i:=1;
+  while i<=dim do begin
+    if elem[i]=-1 then
+    begin
+       if dim > 0 then begin
+       for y:=i to dim do begin
+          elem[y]:=elem[y+1];
+    end;
+
+      dim:=dim-1;
+  i:=i-1;
+  end;
+
+    end;
+    i:=i+1;
+  end;
+  for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+
+end;
+
+procedure TVector.pregunta9(e:integer;r:integer;t:integer);
+var p,d,aux,i,s,l :integer;
+begin
+ for p:=1 to e-1 do begin
+   s:=p;
+   for d:=p+1 to e do begin
+     if elem[d]<elem[s] then
+        begin
+          s:=d;
+        end;
+     end;
+   if s<>p then
+      begin
+         aux:=elem[s];
+         elem[s]:=elem[p];
+         elem[p]:=aux;
+      end;
+   end;
+
+
+  for p:=r downto e+1 do
+  begin
+
+    for d:=e to p-1 do
+    begin
+      if elem[d]>elem[d+1] then
+      begin
+         aux:=elem[d];
+         elem[d]:=elem[d+1];
+         elem[d+1]:=aux;
+      end;
+
+    end;
+
+  end;
+
+  for p:=r to t-1 do begin
+      for d:=r to t do begin
+        if elem[d]> elem[p] then
+        begin
+             aux:=elem[d];
+             elem[d]:=elem[p];
+             elem[p]:=aux;
+         end;
+        end;
+
+  end;
+
+  for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+ end;
+
+procedure TVector.pregunta10(e: integer; r: integer);
+var i,j,v,l:integer;
+   begin
+  for i:=2 to dim do
+  begin
+
+      v:=elem[i];
+
+      j:=i-1;
+
+      while (j>=1) and (elem[j]>v) do
+      begin
+        elem[j+1]:=elem[j];
+         j:=j-1;
+      end;
+      elem[j+1]:=v;
+  end;
+
+
+    for i:=1 to dim do begin
+     l:=elem[i];
+     writeln(l);
+     end;
+
+end;
+
+
+end.
+                       
